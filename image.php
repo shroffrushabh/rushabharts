@@ -41,5 +41,4 @@ header("Content-type: image/png");
 imagepng($img);
 imagedestroy($img);
 
-
 ?>
