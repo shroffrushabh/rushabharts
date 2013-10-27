@@ -1,0 +1,69 @@
+This is the generic request format for any kind of request. 
+Based on the API call the "method" and the "params" will differ.
+Please take a close look at 'creatUser' and 'validateUser' request.
+
+In case of 'createUser' request all the details required to create 
+user are passed in the 'params' array.Since its an array the API 
+also enables creation of multiple users in one go.
+
+In case of 'validateUser' request the 'params' array is empty. 
+As all the details required to authenticate user are supplied 
+in 'userName' and 'pwd' tags.
+
+please note tags such as 'deviceId','method','userName','pwd',
+'applicationId','params' are manadatory.one can have 'params' array 
+empty as certain method may not require parameters. for e.g the 
+'validateUser' method.
+
+/* createUser Request*/
+{
+	"deviceId": "xxxx-yyyy-xxxx-yyyy",
+	"method": "createUser",
+	"userName": "xyz@xyz.com",
+	"pwd": "",
+	"applicationId": "1",
+	"params":
+		[
+			{ 
+				"firstName": "sachiin",
+				"lastName": "kadam" ,
+				"passwordQuestion":"pet name" ,
+				"passwordAnswer":"sachin",
+				"country":"India",
+				"city":"Mumbai",
+				"zipCode":"400063",
+				"specialtyId":"1",
+				"professionId":"1"
+			}	
+		]
+}
+
+/* validateUser Request*/
+{
+	"deviceId": "xxxx-yyyy-xxxx-yyyy",
+	"method": "validateUser",
+	"userName": "xyz@xyz.com",
+	"userId": "123",
+	"pwd": "",
+	"applicationId": "1",
+	"params":[]
+}
+
+/* createUser Response*/
+ {
+ 	"status":1,
+ 	"error":{"errorCode":null,"errorMessage":null,"trace":null},
+ 	"result":[{"userId":"45"}]
+ }
+
+/* create user error response */
+{
+	"status":0,
+	"error":
+	{"errorCode":100,
+	"errorMessage":"User with email Id already exists.",
+	"trace":[{"file":"C:\\wamp\\www\\igcserver\\Membership\\MembershipWS.php","line":85,"function":"createUser","class":"UserManager","type":"->",
+	"args":[{}]}]
+	},
+	"result":[]
+}

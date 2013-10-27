@@ -1,0 +1,206 @@
+@charset "utf-8";
+/* CSS Document */
+
+#body{
+	background-color:#F9F;
+}
+
+#header{
+	background-image:url(upper.jpg);
+	height:180px;
+	margin-top:-20px;
+	width:100%;
+}
+
+a{
+	text-decoration:none;
+	color:#000;
+}
+
+
+#logo{
+	
+	margin-left:400px;
+	padding-bottom:10px;
+}
+
+#container{
+
+	height:800x;
+	position:relative;	
+	
+}
+#container2{
+	height:800px;
+	
+	margin-left:auto;
+	margin-right:auto;
+}
+#footer{
+	background-image:url(lower.jpg);
+	height:180px;
+	position:relative;
+	width:100%;
+}
+#menu {
+	float: left;
+	list-style: none;
+	width: 100%;
+	font-size: 1.5em;
+	border-bottom:1px solid;
+
+	
+}
+#menu li {
+	list-style: none;
+	float: left;
+	font-family: "Segoe Print", "Arial", Times New Roman, sans-serif;
+	color: #000000;
+	float: left;
+	padding: 8px 12px;
+	font-weight:bold;
+	font-style:normal;
+}
+#menu li:hover {
+	background: #d29c1a;
+	color: #fff;
+}
+
+
+
+#loading{
+	visibility:hidden;
+	margin-left:350px;
+}
+
+#loading img{
+	margin-left:200px;
+}
+
+#tagline{
+	margin-left:800px;
+	
+}
+
+#content{
+	
+	font-family:"Segoe Print", "Arial", Times New Roman, sans-serif;
+	list-style:none;
+	font-size:1.2em;
+	font-weight:bold;
+	float:left;
+	width:100%;
+	position:relative;
+	
+}
+
+
+
+
+#content li
+{
+float:left;
+list-style:none;
+padding-left:0px;
+padding-right:35px;	
+}
+
+.glinks:hover {
+	background: #d29c1a;
+	color: #fff;
+}
+
+
+#target{
+	margin-left:+150px;
+	margin-right:+150px;
+	margin-top:-50px;
+	position:relative;
+}
+
+#target li:hover
+{
+	background: #d29c1a;
+	color: #fff;
+	padding-left:10px;
+	padding-right:10px;
+}
+
+#swap
+{
+	margin-left:-20px;
+}
+
+
+.thumb {
+	margin-top:10px;
+	margin-left:+150px;
+	list-style: none;
+	 padding: 10px;
+	width: 1050px;
+}
+.thumb li {
+	margin: 0; padding: 5px;
+	position: relative; 
+	width: 210px;
+	height: 210px;
+}
+
+
+.thumb li img {
+	width: 200px; height: 200px; 
+	-ms-interpolation-mode: bicubic; 
+	border: 1px solid #ddd;
+	padding: 5px;
+	background: #f0f0f0;
+	position: absolute;
+	left: 0; top: 0;
+}
+
+#comment{
+	position:absolute;
+	left:500px;
+	top:50px;
+}
+
+#submit{
+	position:absolute;
+	left:140px;
+}
+
+#code{
+	margin-left:240px;
+}
+
+
+
+#pageloading{
+	visibility:hidden;
+	position:absolute;
+	left:+550px;
+	top:+150px;
+}
+
+#pageloading p{
+	margin-left:-40px;
+}
+
+#contact{
+	position:absolute;
+	top:100px;
+	left:750px;
+}
+
+#captcha{
+	position:relative;
+	left:500px;
+	top:-300px;
+}
+
+#txt{
+	margin-left:-30px;
+}
+
+#ordering{
+	font-size:0.8em;
+}

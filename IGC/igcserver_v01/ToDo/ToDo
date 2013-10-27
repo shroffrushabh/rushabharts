@@ -1,0 +1,9 @@
+To Do
+
+1. Define Response JSON.
+2. Put Mail Logic.
+3. Notes.
+4. Bookmark.
+5. Error Handling - Global Exception Handler. SP to update error log tables.
+6. User Folder/vault creation logic in user creation
+7. Define folder structure for IGC resources

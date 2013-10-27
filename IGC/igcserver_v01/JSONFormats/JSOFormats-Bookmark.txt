@@ -1,0 +1,54 @@
+/* addBookmarks */
+
+{
+	"deviceId": "xxxx-yyyy-xxxx-yyyy",
+	"method": "addBookmarks",
+	"userName": "xyz@xyz.com",
+	"pwd": "",
+	"applicationId": "1",
+	"params":
+		[
+			{ "productId": "1001", "pageId": "1" , "fileName":"hepc.html" , "description":"Hepititis C"},
+			{ "productId": "1001", "pageId": "1" , "fileName":"hepc.html" , "description":"Hepititis C"},
+			{ "productId": "1001", "pageId": "1" , "fileName":"hepc.html" , "description":"Hepititis C"}			
+		]
+
+}
+
+/* getUserBookmarks Request*/
+
+{
+	"deviceId": "xxxx-yyyy-xxxx-yyyy",
+	"method": "addBookmarks",
+	"userId":"123",
+	"userName": "xyz@xyz.com",
+	"pwd": "",
+	"applicationId": "1",
+	"params":[]
+}
+
+/* getUserBookmarksDelta Request*/
+
+{
+	"deviceId": "xxxx-yyyy-xxxx-yyyy",
+	"method": "addBookmarks",
+	"userName": "xyz@xyz.com",
+	"userId": "123",
+	"pwd": "",
+	"applicationId": "1",
+	"lastSyncDate":"",
+	"params":[]
+}
+
+/* getUserBookmarks & getUserBookmarksDelta Response */
+
+{
+	"userName": "xyz@xyz.com",
+	"userId": "123",
+	"bookmarks":
+		[
+			{ "productId": "1001", "pageId": "1" , "fileName":"HepC.html" , "description":"Hepititis C"},
+			{ "productId": "1001", "pageId": "1" , "fileName":"HepC.html" , "description":"Hepititis C"},
+			{ "productId": "1001", "pageId": "1" , "fileName":"HepC.html" , "description":"Hepititis C"}			
+		]
+}

@@ -1,0 +1,57 @@
+/* main.css */
+
+body {
+	background-color: #222;
+	color: #50a03b;
+	font-family: "Droid Sans", Verdana, Helvetica, sans-serif !important;
+	font-size: 12pt;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: #888;
+	font-weight: bold;
+}
+
+h1 {
+	font-size: 200%;
+}
+
+h2 {
+	font-size: 175%;
+}
+
+h3 {
+	font-size: 150%;
+}
+
+h4 {
+	font-size: 120%;
+}
+
+h5, h6 {
+	font-size: 100%;
+}
+
+ul#nav {
+	float: right;
+	list-style-type: none;
+	margin: 0.5em 0em;
+	padding: 0em;
+}
+
+ul#nav li {
+	float: left;
+}
+
+fieldset {
+	border: 1px solid #666;
+}
+
+input {
+	font-family: "Droid Sans", Verdana, Helvetica, sans-serif !important;
+}
+
+a {
+	color: #60c142;
+}
+

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>message console - incognito mode</title>
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+		<link rel="stylesheet" type="text/css" href="/static/screen.css" media="screen, projection"/>
+		<link rel="stylesheet" type="text/css" href="/static/print.css" media="print"/>
+		<link rel="stylesheet" type="text/css" href="/static/jquery-ui.custom.css"/>
+		<link rel="stylesheet" type="text/css" href="/static/main.css"/>
+
+		<link rel="shortcut icon" href="/static/nyan-icon.ico"/>
+		<script src="/static/jquery.min.js"></script>
+		<script src="/static/jquery-ui.custom.min.js"></script>
+		<script src="/static/sjcl.js"></script>
+		<script src="/static/main.js"></script>
+	</head>
+	<body>
+
+<style>
+	textarea {
+		font-family: "Droid Sans", Verdana, Helvetica, sans-serif !important;
+		height: 4em;
+	}
+
+	#msgs {
+	}
+
+	.msg {
+		border: 1px solid #666;
+		border-radius: 5px;
+		margin-bottom: 1em;
+		padding: 1em 1em 0em 1em;
+	}
+
+	.msg .byline {
+	}
+
+	.msg .author {
+		float: left;
+		font-size: 120%;
+		font-weight: bold;
+	}
+
+	.msg .subject {
+		font-size: 120%;
+		float: left;
+	}
+
+	.msg .body {
+		padding-top: 1em;
+		clear: both;
+	}
+
+	.msg .actions {
+		clear: both;
+		text-align: right;
+	}
+
+	.msg .attachment {
+	}
+
+	.ui-dialog-titlebar {
+		display: none;
+	}
+</style>
+
+<div class="container">
+
+	<div class="span-24 last">
+		<ul id="nav">
+			<li>logged in as neo</li>
+			<li>&nbsp;&mdash;&nbsp;<a href="/logout">logout</a></li>
+		</ul>
+
+	</div>
+
+	<div class="span-24 append-bottom last">
+		<h2>message console</h2>
+
+		<div id="status" style="display: none;"></div>
+
+		<form id="post">
+			<fieldset>
+				<legend>post a message</legend>
+
+				<p>
+					<label for="subject">subject</label>
+					<br/>
+					<input id="subject" name="subject" type="text" size="32"/>
+				</p>
+				<p>
+					<label for="body">message</label>
+					<br/>
+
+					<textarea id="body" name="body"
+						placeholder="enter message in markdown format"></textarea>
+					<br/>
+					<input id="encrypt" name="encrypt" type="checkbox">encrypt message</input>
+					<input id="key" name="key" type="password" size="32" placeholder="encryption key"/>
+				</p>
+				<p>
+					<input type="submit" value="post"/>
+					<input type="reset" value="clear"/>
+
+				</p>
+			</fieldset>
+		</form>
+
+		<div id="err" class="error" style="display: none;"></div>
+
+		<h2>messages</h2>
+		<div id="msgs"></div>
+
+	</div>
+
+</div>
+
+<div id="links" style="display: none;">
+	<iframe src="#" width="80%" marginwidth="0%">
+		no iframe support
+	</iframe>
+</div>
+
+<script type="text/javascript">
+	var updateMsgs = function() {
+		var errDiv = $('#err');
+		var msgsDiv = $('#msgs');
+
+		errDiv.hide();
+
+		$.get('/msgs/get', function(data) {
+			var msgs = '';
+			$.each(data.msgs, function(i, x) {
+				msgs += '<div id="msg-' + x.id + '" class="msg">' +
+					'<div class="byline"><div class="author">' + x.author +
+					'</div><div class="subject">&nbsp;&mdash;&nbsp;' + x.subject +
+					'</div></div>';
+
+				if (!x.encrypted) {
+					msgs += '<div class="body">' + x.body + '</div>';
+				} else {
+					msgs += '<div class="body" style="display: none;">' + x.body + '</div>';
+				}
+
+				if (x.attachment) {
+					msgs += '<div class="attachment"><a href="/msg/attachment/' + x.id +
+					'">attachment</a></div>';
+				}
+
+				msgs += '<div class="actions"><form class="inline" ' +
+					'onsubmit="return decryptMsg(' + x.id + ')">';
+
+				if (x.encrypted) {
+					msgs += '<span id="df-' + x.id + '"><input id="msg-key-' + x.id +
+						'" type="password" placeholder="decryption key" size="32"/>' +
+						'<input type="submit" value="decrypt"/> &mdash; </span>';
+				}
+
+
+				msgs += '<a class="msg-delete" href="#" onclick="return deleteMsg(' +
+					x.id + ')">delete</a></form></div></div>';
+			});
+
+			msgsDiv.html(msgs);
+
+			$('div.body a').each(function(i, e) {
+				$(this).click(function() {
+					$('div#links iframe').attr('src', $(this).attr('href'));
+					$('div#links iframe').attr('height', window.innerHeight - 150);
+					$('div#links').dialog('option', 'height', window.innerHeight - 100);
+					$('div#links').dialog('option', 'width', window.innerWidth - 100);
+					$('div#links').dialog('open');
+					return false;
+				});
+			});
+		});
+	};
+
+	var decryptMsg = function(x) {
+		var errDiv = $('#err');
+		errDiv.hide();
+
+		var d = $('#msg-' + x);
+		var b = d.find('.body');
+		var body = b.text();
+		var pwd = $('#msg-key-' + x).val();
+
+		try {
+			body = sjcl.decrypt(pwd, body);
+			b.html(body).show();
+
+			$('#df-' + x).hide();
+		} catch (e) {
+			errDiv.html('invalid decryption key').show();
+		}
+
+		return false;
+	};
+
+	var deleteMsg = function(x) {
+		var errDiv = $('#err');
+
+		$.post('/msg/delete/' + x, {}, function(data) {
+			if (data.result === 'ok') {
+				updateMsgs();
+			} else {
+				errDiv.text(data.result).show();
+			}
+		}).error(function(data) {
+			errDiv.text(data.responseText).show();
+		});
+
+		return false;
+	};
+
+	$(document).ready(function() {
+		updateMsgs();
+
+		$('form#post').submit(function() {
+			var errDiv = $('#err');
+
+			var body = $('#body').val();
+			var enc = $('#encrypt:checked').val();
+
+			if (enc) {
+				var pwd = $('#key').val();
+				body = sjcl.encrypt(pwd, body);
+			}
+
+			var params = {
+				'body': body,
+				'encrypted': enc,
+				'subject': $('#subject').val(),
+			};
+
+			$.post('/msg', params, function(data) {
+				if (data.result === 'ok') {
+					updateMsgs();
+					$('#subject').val('');
+					$('#body').val('');
+					$('#key').val('');
+				} else {
+					errDiv.text(data.result).show();
+				}
+			}).error(function(data) {
+				errDiv.text(data.responseText).show();
+			});
+
+			return false;
+		});
+
+		$('div#links').dialog({
+			autoOpen: false,
+			draggable: false,
+			modal: true,
+			resizable: false,
+			title: 'link',
+			show: 'fade',
+			hide: 'fade',
+		});
+
+		var msgHandler = function(e) {
+			/* XXX: fast flux means we don't have a stable hostname.
+			 *      let's just use a password
+			if (e.origin !== 'http://www.im/')
+				return;
+			*/
+
+			if (e.data.auth !== xz)
+				return;
+
+			// We're authenticated
+			$('#status').html(e.data.status).show();
+		};
+
+		window.addEventListener("message", msgHandler, false);
+	});
+</script>
+
+
+<!--
+vim:ts=2
+-->
+
+	</body>
+
+</html>
+
+<!--
+vim:ts=2
+-->
+

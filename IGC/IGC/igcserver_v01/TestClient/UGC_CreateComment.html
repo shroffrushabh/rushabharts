@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Create Comment Testing </title>
+<!-- <script src="http://code.jquery.com/jquery-1.7.2.min.js" type="text/javascript"></script> -->
+<script src="./jquery-1.4.1.min.js" type="text/javascript"></script>
+<script src="./jquery.json-2.3.js" type="text/javascript"></script>
+<script type="text/javascript">
+        $(document).ready(function () {
+            $('#btnGetResult').click(function (event) {
+
+            	alert ("called");
+                var usrName = document.getElementById('email').value;
+                var pwd = document.getElementById('password').value;
+                var appId = document.getElementById('applicationId').value;
+                var productId = document.getElementById('productId').value;
+                var commentText = document.getElementById('commentText').value;
+                var deviceId = document.getElementById('deviceId').value;
+                              
+                var params=[{productId : productId,
+                			commentText :commentText
+                			}
+                                    
+                               ];
+             
+                var data1 ={username : usrName,
+                			password : pwd,
+                			appId : appId,method:"createComment",deviceId:deviceId,deviceOs:"",apiVersion:"",param:params};
+                
+
+                 alert($.toJSON(data1));
+                 
+                
+                $.ajax({
+                    type: "POST",
+                    url: 'http://localhost/igcserver/UGC/UGCWS.php',
+                    data: $.toJSON(data1),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: "false",
+                    processData: true,
+                    success: function (data) {
+                    	 var status = data.status;
+                            var error = data.error;
+                            if(status == 1)
+                                {
+                                    alert("Success");
+                                    alert("The Status is: "+ status);
+                                    
+                                }else
+                                    {
+                                        alert(error.errorMessage);
+                                    }
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                    	alert("error");
+                        alert(xhr.status);
+                        alert(thrownError);
+                    }
+                });
+            });
+        });
+</script>
+</head>
+<body>
+
+<table>
+<tr><td>Email</td><td><input id="email"></input></td></tr>
+<tr><td>Password</td><td><input id="password"></input></td></tr>
+<tr><td>ApplicationId</td><td><input id="applicationId"></input></td></tr>
+<tr><td>Product Id</td><td><input id="productId"></input></td></tr>
+<tr><td>Comment</td><td><input id="commentText"></input></td></tr>
+<tr><td>device id</td><td><input id="deviceId"></input></td></tr>
+<tr><td>
+<button id="btnGetResult">ok</button>
+</td></tr>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+/* getProductCatalog Request*/
+{
+	"deviceId": "xxxx-yyyy-xxxx-yyyy",
+	"method": "getProductCatalog",
+	"userName": "xyz@xyz.com",
+	"pwd": "",
+	"applicationId": "1",
+	"params":[]
+}
+
+/* getProductCatalogDelta Request*/
+{
+	"deviceId": "xxxx-yyyy-xxxx-yyyy",
+	"method": "getProductCatalogDelta",
+	"userName": "xyz@xyz.com",
+	"pwd": "",
+	"applicationId": "1",
+	"params":
+	[
+		{"lastSyncDate":"05-07-2012 00:00:00"};
+	]
+}
+
+/* Get catalog response */
+{
+	catalogRecords
+	[
+		{ "productId": "1001",
+		  "authoringOrganization": "IDSA" ,
+		  "title":"Hep C" ,
+		  "isbn":"123456789",
+		  "publishedDate":"01-01-2012 00:00:00",
+		  "endorsedBy":"",
+		  "price":"",
+		  "abstract":""
+		  "shortDescription":""
+		  "size":""
+		  "sizeUnit":""
+		  "priority":""
+		  "type":""
+		  "nameID":""
+		  "packageName":""},
+		{},
+		{}
+	]
+}
+

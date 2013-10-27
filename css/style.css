@@ -1,0 +1,45 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{
+background-color:#FFC;
+}
+
+#wrapper{
+height:2000px;
+width:auto;
+
+}
+
+#wrapper #gallery{
+width:900px;
+margin-left:auto;
+margin-right:auto;
+margin-top:75px;
+}
+
+#gallery .holder{
+	width:225px;
+	height:250px;
+	background-image:url(../images/polaroid.png);
+	float:left;
+}
+
+.holder .thumb{
+	width:140px;
+	height:120px;
+	margin-top:29px;
+	margin-left:43px;
+}
+
+.holder .title{
+width:140px;
+height:40px;
+margin-left:auto;
+margin-right:auto;
+margin-top:15px;
+}
+
+.clear{
+clear:both;
+}
