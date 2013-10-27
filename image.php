@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 $img = imagecreatetruecolor(150,70);
 
 $white = imagecolorallocate($img, 255, 255, 255);
@@ -27,10 +27,10 @@ for($i=1;$i<=rand(1,5);$i++){
 }
 imagefill($img, 0, 0, $white);
 $string = randomString(rand(7,8));
-$_SESSION['string'] = $string;
+//$_SESSION['string'] = $string;
 imagettftext($img, 15, 0, 10, 50, $black, "JC.ttf", $string);
 
-$_SESSION['secret_string'] = $string;
+//$_SESSION['secret_string'] = $string;
 
 header("Content-type: image/png");
 imagepng($img);
