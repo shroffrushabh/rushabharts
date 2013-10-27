@@ -16,7 +16,7 @@ hoverImg();
 				{
 				url="";
 				var prod=$('#prod').val();
-				url="http://localhost/inquiry.php";
+				url="inquiry.php";
 					$.post(    
     				url, 
 					{prod:prod},
@@ -124,7 +124,7 @@ function getCode()
 	{
 		var prod=document.frm.prod.value;
 		
-		xmlhttp.open("GET","http://localhost/inquiry.php?prod="+prod,true);
+		xmlhttp.open("GET","nquiry.php?prod="+prod,true);
 		alert("Chrome");
 		xmlhttp.onreadystatechange=function()
 		{
@@ -327,7 +327,7 @@ function submitAjax()
 			}
 		}
 		
-				xmlhttp.open("GET","http://localhost/db.php?json="+jsonStr,true);
+				xmlhttp.open("GET","db.php?json="+jsonStr,true);
 		
 		xmlhttp.send(null);	
 	}

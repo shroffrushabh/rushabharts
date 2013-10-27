@@ -28,6 +28,7 @@ a{
 
 	height:800x;
 	position:relative;	
+	overflow-x:hidden;
 	
 }
 #container2{
@@ -171,8 +172,6 @@ padding-right:35px;
 #code{
 	margin-left:240px;
 }
-
-
 
 #pageloading{
 	visibility:hidden;
