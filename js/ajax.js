@@ -370,7 +370,7 @@ function checkcode(thecode) {
             if(captchaOK != 1) {
               alert('The entered code was not correct. Please try again');
 			  
-			   $('#img').replaceWith('<img src="http://localhost/image.php" id="img" name="img" border="0">');
+			   $('#img').replaceWith('<img src="http://54.204.22.228/image.php" id="img" name="img" border="0">');
 			  
               document.myform.code.value='';
               document.myform.code.focus();
